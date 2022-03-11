@@ -1,5 +1,7 @@
-import { Routes, Route } from "react-router-dom"
 import "./App.css"
+
+import { Route, Routes } from "react-router-dom"
+
 import { Navbar } from "./components/Navbar/Navbar"
 import { ProductDetails } from "./pages/ProductDetails"
 import { SearchResults } from "./pages/SearchResults"
@@ -18,7 +20,7 @@ function App() {
         }
       />
       <Route
-        path="/item"
+        path="/item/:id"
         element={
           <WithNavigation>
             <ProductDetails />

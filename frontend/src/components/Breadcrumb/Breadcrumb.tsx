@@ -1,26 +1,35 @@
 import Breadcrumbs from "@mui/material/Breadcrumbs"
-import Typography from "@mui/material/Typography"
 import Link from "@mui/material/Link"
 import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
 
-export const Breadcrumb = () => {
-  const breadcrumbs = [
-    <Link underline="hover" key="1" color="#999999" href="#" fontSize={14}>
-      Electrónica, Audio y Video
-    </Link>,
-    <Link underline="hover" key="2" color="#999999" href="#" fontSize={14}>
-      iPod
-    </Link>,
-    <Typography key="3" color="#999999" fontWeight="bold" fontSize={14}>
-      32 GB
-    </Typography>,
-  ]
+interface Category {
+  id: string,
+  name: string
+}
+
+interface BreadcrumbProps {
+  categories?: Array<Category>
+}
+
+export const Breadcrumb = (props: BreadcrumbProps) => {
+  let lastCategory = props.categories && props.categories != undefined ? props.categories[props.categories.length - 1] : null
 
   return (
-    <Stack spacing={2} marginY="16px">
+    <>
+    {props.categories && props.categories != undefined ? <Stack spacing={2} marginY="16px">
       <Breadcrumbs separator="›" aria-label="breadcrumb" color="#999999">
-        {breadcrumbs}
+        {props.categories.map(category => (
+          category != lastCategory
+          ? (<Link underline="hover" key={category.id} color="#999999" href="#" fontSize={14}>
+            {category.name}
+          </Link>)
+          : (<Typography key={category?.id} color="#999999" fontWeight="bold" fontSize={14}>
+            {category?.name}
+          </Typography>)
+        ))}
       </Breadcrumbs>
-    </Stack>
+    </Stack> : null}
+    </>
   )
 }
