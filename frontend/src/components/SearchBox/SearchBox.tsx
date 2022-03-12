@@ -1,6 +1,6 @@
 import { Button, InputBase } from "@mui/material"
 
-import axios from "axios";
+import axios from "axios"
 import { styled } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { useSearchParams } from "react-router-dom"
@@ -44,8 +44,7 @@ export const SearchBox = () => {
   const [query, setQuery] = useState(search)
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter")
-      navigate(`/items?search=${query}`)
+    if (e.key === "Enter") navigate(`/items?search=${query}`)
   }
 
   return (
@@ -54,7 +53,7 @@ export const SearchBox = () => {
         placeholder="Nunca dejes de buscar"
         inputProps={{ "aria-label": "search" }}
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         onKeyPress={handleKeyPress}
       />
       <SearchButton onClick={() => navigate(`/items?search=${query}`)}>

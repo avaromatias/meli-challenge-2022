@@ -3,7 +3,7 @@ import { CategoryModel } from "./category"
 import { ItemModel } from "./item"
 
 export type ItemResultModel = {
-    author: AuthorModel,
-    categories: Array<CategoryModel>,
-    item: ItemModel
+  author: AuthorModel
+  categories: Array<CategoryModel>
+  item: ItemModel
 }

@@ -1,3 +1,3 @@
-import { GetItemDetail, SearchItem } from "./items-controller";
+import { GetItemDetail, SearchItem } from "./items-controller"
 
-export const controllers = [SearchItem, GetItemDetail];
+export const controllers = [SearchItem, GetItemDetail]

@@ -15,34 +15,34 @@ import axios from "axios"
 import { useSearchParams } from "react-router-dom"
 
 interface Author {
-  name: string,
+  name: string
   lastname: string
 }
 
 interface Category {
-  id: string,
-  name: string,
+  id: string
+  name: string
   path_from_root: Array<Category>
 }
 
 interface Price {
-  currency: string,
-  amount: Number,
+  currency: string
+  amount: Number
   decimals: Number
 }
 
 interface Item {
-  id: string,
-  title: string,
-  price: Price,
-  picture: string,
-  condition: string,
+  id: string
+  title: string
+  price: Price
+  picture: string
+  condition: string
   free_shipping: Boolean
 }
 
 interface QueryResult {
-  author: Author,
-  categories: Array<Category>,
+  author: Author
+  categories: Array<Category>
   items: Array<Item>
 }
 
@@ -51,13 +51,21 @@ export const SearchResults = () => {
   const search = queryParams.get("search") || ""
   const [results, setResults] = useState<QueryResult>()
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const locations = ["Capital Federal", "Buenos Aires", "Rosario", "Santa Fe", "Córdoba", "Mendoza", "Misiones"]
+  const locations = [
+    "Capital Federal",
+    "Buenos Aires",
+    "Rosario",
+    "Santa Fe",
+    "Córdoba",
+    "Mendoza",
+    "Misiones",
+  ]
 
   const dispatchSearch = async (query: string) => {
     setIsLoading(true)
     try {
       let apiResponse = await axios({
-        method: 'get',
+        method: "get",
         url: `http://localhost:9000/api/items?q=${query}`,
       })
       setResults(apiResponse.data)
@@ -74,17 +82,19 @@ export const SearchResults = () => {
 
   return (
     <Container fixed style={{ marginTop: "16px" }}>
-      {
-        isLoading ? (
-          <Grid container flexDirection="row" justifyContent="center" >
-            <Grid item>
-              <CircularProgress size={100} style={{ color: "#999999" }} />
-            </Grid>
+      {isLoading ? (
+        <Grid container flexDirection="row" justifyContent="center">
+          <Grid item>
+            <CircularProgress size={100} style={{ color: "#999999" }} />
           </Grid>
-        ) :
-        results && results.items && results.items.length > 0
-        ? (<>
-          <Breadcrumb categories={results?.categories?.slice(0, 1)?.shift()?.path_from_root} />
+        </Grid>
+      ) : results && results.items && results.items.length > 0 ? (
+        <>
+          <Breadcrumb
+            categories={
+              results?.categories?.slice(0, 1)?.shift()?.path_from_root
+            }
+          />
           <Paper elevation={0} sx={{ padding: "16px", marginBottom: 10 }}>
             {results?.items?.map((result) => {
               return (
@@ -130,7 +140,11 @@ export const SearchResults = () => {
                         </Grid>
                         <Grid item>
                           <Typography variant="caption" color="#999999">
-                            {locations[Math.floor(Math.random()*locations.length)]}
+                            {
+                              locations[
+                                Math.floor(Math.random() * locations.length)
+                              ]
+                            }
                           </Typography>
                         </Grid>
                       </Grid>
@@ -151,13 +165,14 @@ export const SearchResults = () => {
               )
             })}
           </Paper>
-        </>)
-        : (<Paper elevation={0} sx={{ padding: "16px" }}>
+        </>
+      ) : (
+        <Paper elevation={0} sx={{ padding: "16px" }}>
           <Typography variant="caption" color="#999999">
             No se hallaron resultados.
           </Typography>
-        </Paper>)
-      }
+        </Paper>
+      )}
     </Container>
   )
 }

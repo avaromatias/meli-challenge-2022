@@ -1,5 +1,5 @@
 export type PriceModel = {
-    currency: String,
-    amount: Number,
-    decimals: Number
+  currency: String
+  amount: Number
+  decimals: Number
 }

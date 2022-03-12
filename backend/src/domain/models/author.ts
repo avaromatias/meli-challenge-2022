@@ -1,4 +1,4 @@
 export type AuthorModel = {
-    name: String,
-    lastname: String
+  name: String
+  lastname: String
 }
