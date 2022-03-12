@@ -1,5 +1,6 @@
 {
    "compilerOptions": {
+      "jsx": "react-jsx",
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "outDir": "./dist",
@@ -23,7 +24,8 @@
    },
    "include": [
       "src",
-      "tests"
+      "tests",
+      "../frontend/src"
    ],
    "exclude": []
 }

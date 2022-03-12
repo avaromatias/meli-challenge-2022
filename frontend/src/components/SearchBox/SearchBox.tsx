@@ -58,11 +58,12 @@ export const SearchBox = () => {
         onKeyPress={handleKeyPress}
       />
       <SearchButton onClick={() => navigate(`/items?search=${query}`)}>
-        <img
+        {/* <img
           src={require("../../assets/ic_Search.png")}
           style={{ pointerEvents: "none" }}
           alt="Botón de búsqueda"
-        />
+        /> */}
+        asd
       </SearchButton>
     </Search>
   )
