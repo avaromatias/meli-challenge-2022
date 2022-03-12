@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "watch": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts"
+    "watch": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest"
   },
   "dependencies": {
     "@tsclean/core": "^1.7.0",
@@ -26,5 +27,15 @@
   },
   "_moduleAliases": {
     "@": "dist"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "transform": {
+      "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!variables/.*)"
+    ]
   }
 }
