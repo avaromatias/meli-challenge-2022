@@ -11,7 +11,7 @@ async function init() {
     const app = await StartProjectInit.create(AppContainer)
     app.use(helmet());
     app.enableCors();
-    app.use("/static", express.static(path.join(__dirname, "..", "dist", "frontend", "src")))
+    app.use("/static", express.static(path.join(__dirname, "..", "..", "frontend", "src")))
     await app.listen(PORT, () => console.log('Running on port ' + PORT))
 }
    
