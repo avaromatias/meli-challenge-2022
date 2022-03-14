@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom"
 import { Navbar } from "./components/Navbar/Navbar"
 import { ProductDetails } from "./pages/ProductDetails"
 import { SearchResults } from "./pages/SearchResults"
+import WithContainer from "./utils/hooks/WithContainer"
 import WithNavigation from "./utils/hooks/WithNavigation"
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
         path="/items"
         element={
           <WithNavigation>
-            <SearchResults />
+            <WithContainer>
+              <SearchResults />
+            </WithContainer>
           </WithNavigation>
         }
       />
@@ -23,7 +26,9 @@ function App() {
         path="/item/:id"
         element={
           <WithNavigation>
-            <ProductDetails />
+            <WithContainer>
+              <ProductDetails />
+            </WithContainer>
           </WithNavigation>
         }
       />

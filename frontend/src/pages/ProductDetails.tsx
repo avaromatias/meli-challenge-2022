@@ -1,53 +1,14 @@
-import {
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material"
+import { BIG_MARGIN, SECONDARY_GRAY, SMALL_MARGIN } from "../utils/Constants"
+import { Grid, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 
 import { Breadcrumb } from "../components/Breadcrumb/Breadcrumb"
+import { ItemPictureDescription } from "../components/ItemPictureDescription/ItemPictureDescription"
+import { ItemResult } from "../types/ItemResult"
+import { ItemSaleInformation } from "../components/ItemSaleInformation/ItemSaleInformation"
+import { LoadingData } from "../components/LoadingData/LoadingData"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-
-const BIG_MARGIN = "32px"
-const SMALL_MARGIN = "16px"
-
-interface Author {
-  name: string
-  lastname: string
-}
-
-interface Price {
-  currency: string
-  amount: Number
-  decimals: Number
-}
-
-interface Item {
-  id: string
-  title: string
-  price: Price
-  picture: string
-  condition: string
-  free_shipping: Boolean
-  sold_quantity: Number
-  description: String
-}
-
-interface Category {
-  id: string
-  name: string
-  path_from_root: Array<Category>
-}
-
-interface ItemResult {
-  author: Author
-  categories: Array<Category>
-  item: Item
-}
 
 export const ProductDetails = () => {
   const { id } = useParams()
@@ -74,13 +35,9 @@ export const ProductDetails = () => {
   }, [id])
 
   return (
-    <Container fixed style={{ marginTop: "16px" }}>
+    <>
       {isLoading ? (
-        <Grid container flexDirection="row" justifyContent="center">
-          <Grid item>
-            <CircularProgress size={100} style={{ color: "#999999" }} />
-          </Grid>
-        </Grid>
+        <LoadingData />
       ) : product ? (
         <>
           <Breadcrumb
@@ -90,79 +47,18 @@ export const ProductDetails = () => {
           />
           <Paper elevation={0} sx={{ padding: BIG_MARGIN, marginBottom: 10 }}>
             <Grid container flexDirection="row" justifyContent="space-between">
-              <Grid
-                item
-                style={{
-                  width: "680px",
-                }}
-              >
-                <img
-                  src={product?.item.picture}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    marginBottom: SMALL_MARGIN,
-                  }}
-                />
-                <Typography
-                  variant="h6"
-                  marginBottom={BIG_MARGIN}
-                  fontSize={28}
-                >
-                  Descripción del producto
-                </Typography>
-                <Typography
-                  variant="body2"
-                  marginBottom={BIG_MARGIN}
-                  fontSize={16}
-                >
-                  {product?.item.description}
-                </Typography>
-              </Grid>
-              <Grid item flex={1}>
-                <Typography variant="caption" marginBottom={SMALL_MARGIN}>
-                  {product?.item.condition} - {product?.item.sold_quantity}{" "}
-                  vendidos
-                </Typography>
-                <Typography
-                  variant="h6"
-                  marginBottom={BIG_MARGIN}
-                  fontSize={24}
-                >
-                  {product?.item.title}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  marginBottom={BIG_MARGIN}
-                  fontSize={46}
-                >
-                  {product?.item.price.currency} {product?.item.price.amount},
-                  {product?.item.price.decimals}
-                </Typography>
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    style={{
-                      backgroundColor: "#3483FA",
-                      boxShadow: "none",
-                      textTransform: "none",
-                    }}
-                  >
-                    Comprar
-                  </Button>
-                </Grid>
-              </Grid>
+              <ItemPictureDescription item={product.item} />
+              <ItemSaleInformation item={product.item} />
             </Grid>
           </Paper>
         </>
       ) : (
-        <Paper elevation={0} sx={{ padding: "16px" }}>
-          <Typography variant="caption" color="#999999">
+        <Paper elevation={0} sx={{ padding: SMALL_MARGIN }}>
+          <Typography variant="caption" color={SECONDARY_GRAY}>
             Ups! Parece que el producto no existe.
           </Typography>
         </Paper>
       )}
-    </Container>
+    </>
   )
 }

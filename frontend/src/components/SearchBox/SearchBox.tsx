@@ -1,6 +1,6 @@
 import { Button, InputBase } from "@mui/material"
 
-import axios from "axios"
+import { LIGHT_GREY } from "../../utils/Constants"
 import { styled } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { useSearchParams } from "react-router-dom"
@@ -23,10 +23,10 @@ const SearchButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(1.3, 2),
   borderTopLeftRadius: 0,
   borderBottomLeftRadius: 0,
-  color: theme.palette.getContrastText("#EEEEEE"),
-  backgroundColor: "#EEEEEE",
+  color: theme.palette.getContrastText(LIGHT_GREY),
+  backgroundColor: LIGHT_GREY,
   "&:hover": {
-    backgroundColor: "#EEEEEE",
+    backgroundColor: LIGHT_GREY,
   },
 }))
 
@@ -39,7 +39,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const SearchBox = () => {
   const navigate = useNavigate()
-  const [queryParams, setQueryParams] = useSearchParams()
+  const [queryParams] = useSearchParams()
   const search = queryParams.get("search") || ""
   const [query, setQuery] = useState(search)
 

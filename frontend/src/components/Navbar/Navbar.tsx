@@ -1,11 +1,13 @@
 import { AppBar, Container, Grid, Toolbar } from "@mui/material"
+
+import { PRIMARY_YELLOW } from "../../utils/Constants"
 import { SearchBox } from "../SearchBox/SearchBox"
 
 export const Navbar = () => {
   return (
     <AppBar
       position="sticky"
-      style={{ backgroundColor: "#FFE600", boxShadow: "none" }}
+      style={{ backgroundColor: PRIMARY_YELLOW, boxShadow: "none" }}
     >
       <Toolbar>
         <Container fixed>
