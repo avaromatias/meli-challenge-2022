@@ -43,8 +43,12 @@ export const SearchBox = () => {
   const search = queryParams.get("search") || ""
   const [query, setQuery] = useState(search)
 
+  const handleSearch = () => {
+    if (query.length > 0) navigate(`/items?search=${query}`)
+  }
+
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter") navigate(`/items?search=${query}`)
+    if (e.key === "Enter") handleSearch()
   }
 
   return (
@@ -56,7 +60,7 @@ export const SearchBox = () => {
         onChange={(e) => setQuery(e.target.value)}
         onKeyPress={handleKeyPress}
       />
-      <SearchButton onClick={() => navigate(`/items?search=${query}`)}>
+      <SearchButton onClick={handleSearch}>
         <img
           src={require("../../assets/ic_Search.png")}
           style={{ pointerEvents: "none" }}
